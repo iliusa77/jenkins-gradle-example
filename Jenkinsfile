@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      args '-v /jenkins/.gradle:/jenkins/.gradle'
+      args '-u root:sudo -v /jenkins/.gradle:/jenkins/.gradle'
       image 'gradle:latest'
     }
 
@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'sudo ./gradlew :build'
+        sh './gradlew :build'
       }
     }
     stage('Test') {
